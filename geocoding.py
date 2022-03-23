@@ -5,51 +5,37 @@ from models import FindCoordinates as coor
 
 app = Flask(__name__)
 
+SPACE = " "
+
 
 @app.route("/", methods=["POST", "GET"])
 def your_coordinates():
+    
 
     if request.method == "POST":
 
-        curr_location = str(request.form["curr_location"]).strip(" ")
+        # curr_location = str(
+        #     request.form["st_number"]+SPACE+
+        #     request.form["st_name"]+SPACE+
+        #     request.form["unit"]+SPACE+
+        #     request.form["city"]+SPACE+
+        #     request.form["state"]+SPACE+
+        #     request.form["zip"]
+        # )
+        
+        curr_location = {
+            "street_number": request.form["st_number"],
+            "street_name": request.form["st_name"],
+            "unit": request.form["unit"],
+            "city": request.form["city"],
+            "state": request.form["state"],
+            "zip": request.form["zip"]
+        }
 
-        return coor.your_coordinates(curr_location)
-        # return display_result(curr_location)
+        return coor().your_coordinates(curr_location)
         
     else:
         return render_template("geolocation.html")
-
-# @app.route("/coordinates")
-# def display_result(location):
-#     return coor.your_coordinates(location)
-
-
-        
-    
-
-
-        
-
-    
-    
-
-    # address = input("Input the address: ")
-
-    # #Your unique private_token should replace value of the private_token variable.
-    # #To know how to obtain a unique private_token please refer the README file for this script.
-    # private_token = "pk.bad269d9e06d0b3e9d42ff3dcba0bba0"
-
-    # data = {
-    #     'key': private_token,
-    #     'q': address,
-    #     'format': 'json'
-    # }
-
-    # response = requests.get(url, params=data)
-
-
-    # latitude = response.json()[0]['lat']
-    # longitude = response.json()[0]['lon']
     
     
 

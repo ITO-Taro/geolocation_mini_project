@@ -7,7 +7,7 @@
 </head>
 {% block content %}
 <body>
-    <div>
+    <div method="GET" action="/">
         <h1>LOCATON: {{coordinates['location']}}</h1>
         <h2>The latitude of the given location is: {{coordinates['latitude']}}</h2>
         <h2>The longitude of the given location is: {{coordinates['longitude']}}</h2>
