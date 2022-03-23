@@ -1,0 +1,101 @@
+Street_Name,Street_Address,Zip,Country
+Lesch Track,411 Tobin Ports Apt. 174,54580,Kiribati
+Block Turnpike,6714 Kenton Ridge,61896,Tonga
+O'Hara Station,233 Isabelle Extension,35610,Guadeloupe
+Jovanny Harbors,9624 Schowalter Spring,89488-6670,United States Minor Outlying Islands
+Domingo Brooks,827 Jean Motorway Suite 508,34830-3603,Marshall Islands
+Kuhic Drives,5558 Omari Stream,60030,Nicaragua
+Nitzsche Stream,2551 Runolfsson Village Suite 438,25855,Brazil
+Mitchell Square,8184 Carroll Route,19979,Cocos (Keeling) Islands
+Heller Radial,3327 Vidal Mill,53736-8050,Romania
+Conn Views,6587 Ondricka Parkway Apt. 804,29033,Kyrgyz Republic
+Kassulke Cove,90307 Stan Row Apt. 358,53573,Suriname
+Klocko River,96083 Beier Place,90707,Finland
+Arely Rue,213 Raegan Pines Apt. 849,82162,Iceland
+Champlin Common,7673 Anahi Harbor,28182,Greece
+Amaya Locks,91946 Graham Run Suite 327,21638-3155,Cameroon
+Carmelo Forges,7190 Alia Mews Suite 603,14576,Belize
+Estrella View,461 Bergstrom Stream,19762,Australia
+Edmond Bridge,1001 Andreanne Lodge,89598-8101,Sri Lanka
+Hahn Alley,239 Sadie Mountain Apt. 468,95659,Sierra Leone
+Kris Passage,32365 Burdette Oval Suite 798,28829,Finland
+Deckow Ridges,3425 Charity Fort Apt. 184,05517-5988,Canada
+Kuhlman Locks,770 Nelson Harbor Suite 632,06592-6649,American Samoa
+Teagan Knoll,7355 Geoffrey Grove Suite 739,71438-9021,Gambia
+Cale Orchard,646 Hintz Groves Suite 116,68794,Bouvet Island (Bouvetoya)
+Renner Mountains,8655 Roscoe Hollow Suite 581,24476,Ethiopia
+Vandervort Avenue,92364 Thora Locks,45768,Uganda
+Evalyn Shoals,118 Crooks Park,37465,Mongolia
+Lilly Lake,335 Spencer Ranch Suite 204,05870,Italy
+Ashly Ford,27601 Hill Mission,13444-0379,Iran
+Tillman Alley,83365 Vergie Canyon Apt. 056,03562,Central African Republic
+Shanie Extension,980 Stanton Via Apt. 450,34298,Maldives
+Norene Neck,5067 Cecil Glens,12814-0246,Czech Republic
+Berenice Ridge,685 Johnson View,54464-0050,Rwanda
+Gleason Spur,88563 Schmeler View,34219,Western Sahara
+Salvador River,344 O'Connell Station,83728-6302,Kazakhstan
+Dach Ranch,464 Emmie Gateway Apt. 569,83746-3544,Israel
+Karley Ford,6613 Jessica Underpass Apt. 452,36439,Sao Tome and Principe
+Briana Tunnel,93676 Hegmann Parkways,34240-9362,Argentina
+Corwin Crossing,38626 Borer Wells Apt. 939,74382-4600,Bouvet Island (Bouvetoya)
+Schmeler Stravenue,30453 Maximillia Heights Apt. 400,92934-1577,Uzbekistan
+Johnston Ranch,441 Dickens Vista Suite 950,11468,Austria
+Huels Overpass,41222 Brianne Lake,62476-8543,Haiti
+Doyle Groves,9068 Ralph Keys Suite 507,41266-2416,Bhutan
+Lauren Falls,42316 Reagan Drives Suite 040,86046-1326,United States of America
+Louisa Street,45288 Kuhlman Wells Suite 361,56707-0749,Spain
+Jaskolski Green,374 Langworth Court,61353,British Virgin Islands
+Waylon Passage,1071 Tromp Neck Suite 429,83259-4602,Paraguay
+Reba Drives,4976 Batz Drive Suite 696,66798-1182,Northern Mariana Islands
+Jolie Tunnel,77735 Mohr Ferry,79533-5461,Ukraine
+Moen Union,20627 Sean Wall,38080-1395,Lithuania
+Gislason Inlet,8992 Hickle Wall,02469-3649,Gibraltar
+Kunze Keys,78278 Crist Freeway,41636-7930,Lithuania
+Gottlieb Divide,4796 Powlowski Ville,26393,Mongolia
+Fritsch Plains,89572 Keeling Prairie,50375-6194,Venezuela
+Stanton Field,587 Bianka Mountain Suite 702,48685,Uzbekistan
+Betty Parks,661 Joanie Hill Suite 135,07046-8234,Serbia
+Harris Square,837 Gottlieb Street Apt. 805,66209-9634,Thailand
+Samara Heights,26094 Garry Fork,26315,Saint Lucia
+Deanna Branch,37691 Swift View Apt. 515,19464-9777,Benin
+Muller Crossroad,7031 Kuhic Fork Apt. 213,00606,Central African Republic
+Shania Terrace,3624 Barton Parkway Apt. 852,45550-4302,Colombia
+Labadie Ford,882 Von Causeway,08273-7779,Tonga
+Koepp Shores,5816 Bernita Forge,84630-0148,Cote d'Ivoire
+Schaefer Overpass,5476 Ottis Lake,22483,Christmas Island
+Crist Pine,4465 Clare Bypass Suite 962,55155-2453,Aruba
+Dewayne Glen,25723 Quigley Avenue Suite 871,64228-9681,Bulgaria
+Sporer Fort,45490 Francisca Mews,23934,Martinique
+Amir Forge,6459 Cameron Knolls Apt. 422,83418,Sri Lanka
+Bridgette Crescent,215 Hauck Port Apt. 569,36717-0898,Portugal
+Billy Forge,967 Reyna Curve,69759,Rwanda
+Kamren Mountain,351 Mueller View,57294,Tunisia
+Anderson Point,1500 Anita Mills,77273,Svalbard & Jan Mayen Islands
+Rozella Brook,61454 Catalina Village Suite 093,90897,Cayman Islands
+Jaquelin Turnpike,155 Kohler Harbor Apt. 812,66244-5314,Cook Islands
+Conor Pine,626 Collin Walk,76822-1369,Suriname
+Luz Underpass,54991 Hettinger Valleys Apt. 598,51288,Canada
+Justine Loop,581 Rolfson Harbors,87770,Tokelau
+Dolores Rue,2415 Augustus Mall Apt. 104,74709,Guernsey
+Benjamin Ports,8172 Harris Unions,90693,Rwanda
+Graham Radial,776 Schumm River Apt. 598,25586-1697,United States of America
+Terrence Cliff,23683 Tracey Stream,05544-2583,Lithuania
+Morissette Pike,842 Jena Field Apt. 886,39053-9678,Benin
+Myles Mission,135 Letitia Keys,36495,Gabon
+Stracke Parkway,2453 Anjali Row Suite 039,22403,Tunisia
+Lynch Freeway,2627 Ron Turnpike Suite 501,62116,Angola
+Cremin Tunnel,79413 Gaetano Via Apt. 629,00277,Niger
+Crooks Fork,120 Russel Brooks Apt. 457,58620-6730,Kenya
+Harmony Lights,720 Botsford Spur,23080,Cape Verde
+Brekke Mill,57382 Ezekiel Prairie,33012-5878,Gibraltar
+Ulises Shoal,476 Celine Points,15104-1426,Kenya
+Fritsch Common,31975 Hegmann Squares,84204-1046,Botswana
+Marks Neck,2291 Sporer Centers,20217,Martinique
+Kuhic Bridge,36219 Schaden Prairie,35321-3776,Ecuador
+Purdy Prairie,7906 Hamill Ramp Suite 756,49306,Sierra Leone
+Pacocha Drive,274 Freida Isle,03770-9596,Burkina Faso
+Susanna Pike,58810 Hoppe Villages Suite 178,75579,Tajikistan
+Corene Turnpike,899 Adams Square,71568-3600,Nauru
+Peggie Fords,703 O'Keefe Fields,13592,Andorra
+Jackson Points,99446 Dare Mountains Suite 685,90902,Aruba
+Crist Gardens,825 Donnelly Forges,64548-2260,Slovakia (Slovak Republic)

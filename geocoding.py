@@ -1,11 +1,13 @@
-import requests
 from flask import Flask, render_template, request
-from flask import render_template
+# from flask import render_template
 from models import FindCoordinates as coor
+import os
 
 app = Flask(__name__)
 
 SPACE = " "
+
+PWD = os.getcwd()+"/"
 
 
 @app.route("/", methods=["POST", "GET"])
@@ -37,7 +39,18 @@ def your_coordinates():
     else:
         return render_template("geolocation.html")
     
+
+@app.route("/address_file", methods=["POST", "GET"])
+def process_addresses():
+
+    if request.method == "POST":
+        infile = request.form["input_file"]
+        infile = PWD+infile
+        res = coor().read_address_file(infile)
+        return render_template("geolocation_file_result.html", locations=res)
     
+    else:
+        return render_template("geolocation_file.html")
 
     
 

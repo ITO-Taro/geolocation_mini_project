@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width={device-width}, initial-scale=1.0">
+    <title>Geolocation From File</title>
+</head>
+<body>
+    {% block locations %}
+    <table style='border: 1px solid black; width:800px'>
+        <thead>
+            <tr>
+            <th style='border: 1px solid black', rowspan="2"><center>Location</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Latitude</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Logitude</center></th>
+            </tr>
+        </thead>
+        {% for v in locations.values() %}
+        <tbody>
+            <tr>
+            <td style='border: 1px solid black'><center>{{v["location"]}}</center></td>
+            <td style='border: 1px solid black'><center>{{v["latitude"]}}</center></td>
+            <td style='border: 1px solid black'><center>{{v["longitude"]}}</center></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    {% endblock locations %}
+</body>
+</html>
