@@ -1,7 +1,6 @@
 from importlib.util import resolve_name
 import requests
 from flask import render_template
-from pygeocoder import Geocoder
 
 
 TOKEN = "pk.bad269d9e06d0b3e9d42ff3dcba0bba0"
