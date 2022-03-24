@@ -1,9 +1,9 @@
 import requests
 from flask import render_template
 import csv
+from dotenv import dotenv_values
 
-
-TOKEN = "pk.bad269d9e06d0b3e9d42ff3dcba0bba0"
+config = dotenv_values(".env")
 URL = "https://us1.locationiq.com/v1/search.php"
 STATES = {
     'AK': 'Alaska',
@@ -69,7 +69,7 @@ class FindCoordinates:
         #To know how to obtain a unique private_token please refer the README file for this script.
        
             data = {
-                'key': TOKEN,
+                'key': config["TOKEN"],
                 'q': address,
                 'format': 'json'
             }
@@ -119,9 +119,13 @@ class FindCoordinates:
 
                 
     def __validate_address_input(self, address):
-        if all([address["street_number"].isnumeric(),\
-            address["street_name"].isalpha(),\
-                address["city"].isalpha(),\
+        st_num = address["street_number"].split()
+        st_name = address["street_name"].split()
+        city = address["city"].split()
+
+        if all([[i.isnumeric() for i in st_num],\
+            [i.isalpha() for i in st_name],\
+                [i.isalpha() for i in city],\
                     (address["state"] in STATES.keys() or address["state"] in STATES.values()),\
                         self.__valid_zip(address["zip"])]):
                         return True

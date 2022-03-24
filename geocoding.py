@@ -15,15 +15,6 @@ def your_coordinates():
     
 
     if request.method == "POST":
-
-        # curr_location = str(
-        #     request.form["st_number"]+SPACE+
-        #     request.form["st_name"]+SPACE+
-        #     request.form["unit"]+SPACE+
-        #     request.form["city"]+SPACE+
-        #     request.form["state"]+SPACE+
-        #     request.form["zip"]
-        # )
         
         curr_location = {
             "street_number": request.form["st_number"],
@@ -53,7 +44,5 @@ def process_addresses():
         return render_template("geolocation_file.html")
 
     
-
-
 if __name__ == ("__main__"):
     app.run(host='0.0.0.0',port=8000, debug=True)

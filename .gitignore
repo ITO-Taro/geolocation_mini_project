@@ -1,3 +1,4 @@
 VE*
 .DS*
 __pycache__/
+.env
