@@ -1,10 +1,15 @@
+from locale import normalize
 import requests
-from flask import render_template
-import csv
+from flask import render_template, request
+import csv, json
 from dotenv import dotenv_values
+# from datetime import datetime
+import time, datetime
 
 config = dotenv_values(".env")
-URL = "https://us1.locationiq.com/v1/search.php"
+GEO_URL = "https://us1.locationiq.com/v1/search.php"
+WEATHER_URL = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s&units=metric"
+WEATHER_HIST_URL = "https://history.openweathermap.org/data/3.0/history/timemachine?lat=%s&lon=%s&dt=%s&appid=%s"
 STATES = {
     'AK': 'Alaska',
     'AL': 'Alabama',
@@ -62,60 +67,67 @@ STATES = {
 
 class FindCoordinates:
 
+    def __init__(self):
+        self.coordinates = None
+
     def your_coordinates(self, address):
         
         if self.__validate_address_input(address):
         #Your unique private_token should replace value of the private_token variable.
         #To know how to obtain a unique private_token please refer the README file for this script.
-       
+
+            phys_address = " ".join([i for i in address.values()])
+
             data = {
-                'key': config["TOKEN"],
-                'q': address,
+                'key': config["LOCATION_TOKEN"],
+                'q': phys_address,
                 'format': 'json'
             }
 
-            response = requests.get(URL, params=data)
+            response = requests.get(GEO_URL, params=data)
 
             latitude = response.json()[0]['lat']
             longitude = response.json()[0]['lon']
 
             res = {"location": address, "latitude": latitude, "longitude": longitude}
-
-            return render_template("geolocation_result.html", coordinates=res)
+            # self.coordinates = res
+            
+            return res
+            # return render_template("geolocation_result.html", coordinates=res)
         
         else:
-            return render_template("geolocation.html", message="Invalid Address")
+            return False
     
-    def read_address_file(self, infile):
-        res = dict()
-        with open(infile, "r") as file:
-            reader = csv.DictReader(file)
-            address_id = 0
-            for row in reader:
-                if self.__validate_address_file(row):
-                    address = " ".join([row['Street_Address'], row["Street_Name"], row["Zip"], row["Country"]])
-                    data = {
-                    'key': TOKEN,
-                    'q': address,
-                    'format': 'json'
-                    }
+    # def read_address_file(self, infile):
+    #     res = dict()
+    #     with open(infile, "r") as file:
+    #         reader = csv.DictReader(file)
+    #         address_id = 0
+    #         for row in reader:
+    #             if self.__validate_address_file(row):
+    #                 address = " ".join([row['Street_Address'], row["Street_Name"], row["Zip"], row["Country"]])
+    #                 data = {
+    #                 'key': config["LOCATION_TOKEN"],
+    #                 'q': address,
+    #                 'format': 'json'
+    #                 }
 
-                    response = requests.get(URL, params=data)
-                    try:
-                        latitude = response.json()[0]['lat']
-                        longitude = response.json()[0]['lon']
+    #                 response = requests.get(GEO_URL, params=data)
+    #                 try:
+    #                     latitude = response.json()[0]['lat']
+    #                     longitude = response.json()[0]['lon']
 
-                        res[address_id] = {"location": address,"latitude": latitude, "longitude": longitude}
+    #                     res[address_id] = {"location": address,"latitude": latitude, "longitude": longitude}
                     
-                    except:
-                        res[address_id] = {"location": f"ERROR: {address}"}
+    #                 except:
+    #                     res[address_id] = {"location": f"ERROR: {address}"}
 
-                else:
-                    res[address_id] = {"location": f"INVALID: {address}"}
+    #             else:
+    #                 res[address_id] = {"location": f"INVALID: {address}"}
                 
-                address_id += 1
+    #             address_id += 1
         
-        return res
+    #     return res
 
                 
     def __validate_address_input(self, address):
@@ -158,6 +170,113 @@ class FindCoordinates:
                 else:
                     res = False
         return res
+    
+    def current_location(self):
+        curr_location = {
+            "street_number": request.form["st_number"],
+            "street_name": request.form["st_name"],
+            "unit": request.form["unit"],
+            "city": request.form["city"],
+            "state": request.form["state"],
+            "zip": request.form["zip"]
+        }
+
+        return curr_location
         
-            
+
+class Weather(FindCoordinates):
+
+    def __init__(self, location_data):
+        self.loc_data = location_data
+        # self.data_raw = self.weather()
+        self.basic = self.__setup_api()
+
+    def weather_forecast(self):
+
+        # data = {
+        #     "key": config['WEATHER_TOKEN'],
+        #     "lat": self.loc_data['latitude'],
+        #     "lon": self.loc_data['longitude'],
+        #     "address": self.loc_data['location']
+        # }
+
+        data = self.basic
+
+        url = WEATHER_URL % (data['lat'], data['lon'], data['key'])
+
+        response = requests.get(url)
+
+        res = json.loads(response.text)
+
+        offset = res['timezone_offset']
+
+        res = self.normalize_dt(res, offset)
+
+        return res
+    
+    def normalize_dt(self, data, offset):
+
+        if isinstance(data, str):
+            return
+        
+        if isinstance(data, dict):
+
+            for key in data.keys():
+                if (key == 'dt' or key =='sunrise' or key == 'sunset'):
+                    data[key] = self.__unix_to_time(data[key], offset)
+                else:
+                    self.normalize_dt(data[key], offset)
+        
+        if isinstance(data, list):
+
+            for item in data:
+                self.normalize_dt(item, offset)
+        
+        return data
+    
+    # def weather_hist(self, start_date):
+    '''
+    historical data are available only to paid subscribers.
+    Function out of order for now.
+    '''
+    #     api_data = self.basic
+
+    #     start_date = str(int(self.__to_unix(start_date)))
+
+    #     url = WEATHER_HIST_URL % (api_data['lat'], api_data['lon'], start_date, api_data['key'])
+
+    #     response = requests.get(url)
+
+    #     res = json.loads(response.text)
+
+    #     offset = res['timezone_offset']
+
+    #     res = self.normalize_dt(res, offset=0)
+
+    #     return res
+    
+
+    def __setup_api(self):
+        res = {
+            "key": config['WEATHER_TOKEN'],
+            "lat": self.loc_data['latitude'],
+            "lon": self.loc_data['longitude'],
+            "address": self.loc_data['location']
+        }
+
+        return res
+        
+    def __unix_to_time(self, timestamp, offset):
+        res = datetime.datetime.utcfromtimestamp(int(timestamp)+int(offset)).strftime('%Y-%m-%d %H:%M:%S')
+        return res
+
+    def __to_unix(self, date_time):
+        _time = date_time.split()[0].split("-")
+        _time = list(map(int, _time))
+        date_ = datetime.datetime(_time[0], _time[1], _time[2], 0, 0)
+        res = time.mktime(date_.timetuple())
+        return res
+
+
+
 

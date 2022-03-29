@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width={device-width}, initial-scale=1.0">
+    <title>Coordinates & Weather</title>
+</head>
+<body>
+    {% block locations %}
+    <table style='border: 1px solid black; width:800px'>
+        <thead>
+            <tr>
+            <th style='border: 1px solid black', rowspan="2"><center>Latitude</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Logitude</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Sunrise</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Sunset</center></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td style='border: 1px solid black'><center>{{data["lat"]}}</center></td>
+            <td style='border: 1px solid black'><center>{{data["lon"]}}</center></td>
+            <td style='border: 1px solid black'><center>{{data['current']['sunrise']}}</center></td>
+            <td style='border: 1px solid black'><center>{{data['current']['sunset']}}</center></td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+    <table style='border: 1px solid black; width:800px'>
+        <thead>
+            <tr>
+            <th style='border: 1px solid black', rowspan="2"><center>Time</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Temerature</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Pressure</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Humidity</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Wind Speed</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Wind Degree</center></th>
+            </tr>
+        </thead>
+        {% for item in data['hourly'] %}
+        <tbody>
+            <tr>
+            <td style='border: 1px solid black'><center>{{item['dt']}}</center></td>
+            <td style='border: 1px solid black'><center>{{item['temp']}}</center></td>
+            <td style='border: 1px solid black'><center>{{item['pressure']}}</center></td>
+            <td style='border: 1px solid black'><center>{{item['humidity']}}</center></td>
+            <td style='border: 1px solid black'><center>{{item['wind_speed']}}</center></td>
+            <td style='border: 1px solid black'><center>{{item['wind_deg']}}</center></td>
+            </tr>
+        </tbody>
+        {% endfor  %}
+    </table>
+    
+
+    
+    {% endblock locations %}
+</body>
+</html>
