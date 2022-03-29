@@ -1,14 +1,16 @@
-from locale import normalize
+import pandas as pd
 import requests
 from flask import render_template, request
 import csv, json
 from dotenv import dotenv_values
-# from datetime import datetime
+from matplotlib.figure import Figure
+import io, base64
 import time, datetime
+
 
 config = dotenv_values(".env")
 GEO_URL = "https://us1.locationiq.com/v1/search.php"
-WEATHER_URL = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s&units=metric"
+WEATHER_URL = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s&units=imperial"
 WEATHER_HIST_URL = "https://history.openweathermap.org/data/3.0/history/timemachine?lat=%s&lon=%s&dt=%s&appid=%s"
 STATES = {
     'AK': 'Alaska',
@@ -186,12 +188,15 @@ class FindCoordinates:
 
 class Weather(FindCoordinates):
 
+    today = datetime.datetime.today().strftime("%Y-%m-%d")
+
     def __init__(self, location_data):
         self.loc_data = location_data
         # self.data_raw = self.weather()
         self.basic = self.__setup_api()
 
     def weather_forecast(self):
+        df = pd.DataFrame()
 
         # data = {
         #     "key": config['WEATHER_TOKEN'],
@@ -211,6 +216,44 @@ class Weather(FindCoordinates):
         offset = res['timezone_offset']
 
         res = self.normalize_dt(res, offset)
+
+        temp_data = dict()
+        res["today_max"] = 0
+        res["today_min"] = 100
+
+        
+        for dict_obj in res['hourly']:
+            '''
+            create dictionaries for all dates as the key
+            '''
+            date_ = dict_obj['dt'].split()[0]
+            temp_data[date_] = self.hourly_temp_dict()
+        
+        for dict_obj in res['hourly']:
+            '''
+            update the dictionaries created above
+            abbreviated time = keys, temp = values
+            seperated this for-loop to use date as the key as opposed to date&time as key
+            '''
+            date_, time = dict_obj['dt'].split()
+            temperature = float(dict_obj["temp"])
+            temp_data[date_][time[:2]] = temperature
+
+
+            if date_ == self.today:
+                if temperature > res['today_max']:
+                    res['today_max'] = temperature
+                elif temperature < res["today_min"]:
+                    res["today_min"] = temperature
+        
+        # Need to convert dict.keys() object into a type-list so that each element may work with dict methods (e.g, '.keys()')
+        temp_data["groups"] = list(temp_data.keys())
+            
+        chart_url = self.__plot_chart(temp_data, "Temprature By Hour")
+
+        res['chart_url'] = chart_url
+
+        res["today_date"] = self.today
 
         return res
     
@@ -275,6 +318,30 @@ class Weather(FindCoordinates):
         _time = list(map(int, _time))
         date_ = datetime.datetime(_time[0], _time[1], _time[2], 0, 0)
         res = time.mktime(date_.timetuple())
+        return res
+    
+    def hourly_temp_dict(self):
+        res = dict()
+        for num in range(24):
+            if num < 10:
+                num = f"0{num}"
+            res[str(num)] = None
+        
+        return res
+
+    def __plot_chart(self, data, title):
+        fig = Figure(figsize=(9, 5))
+        ax = fig.add_subplot(1,1,1)
+        ax.set_title(label=title, fontdict={'color':'black', 'fontsize':20})
+
+        for group in data["groups"]:
+            ax.plot(data[group].keys(), data[group].values(), label=group)
+            ax.legend()
+            buf = io.BytesIO()
+            fig.savefig(buf, format="png")
+            url = base64.b64encode(buf.getbuffer()).decode("ascii")
+            res = f"data:image/png;base64,{url}"
+            
         return res
 
 

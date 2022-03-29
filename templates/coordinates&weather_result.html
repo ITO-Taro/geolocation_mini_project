@@ -12,16 +12,22 @@
             <tr>
             <th style='border: 1px solid black', rowspan="2"><center>Latitude</center></th>
             <th style='border: 1px solid black', rowspan="2"><center>Logitude</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Date</center></th>
             <th style='border: 1px solid black', rowspan="2"><center>Sunrise</center></th>
             <th style='border: 1px solid black', rowspan="2"><center>Sunset</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>High</center></th>
+            <th style='border: 1px solid black', rowspan="2"><center>Low</center></th>
             </tr>
         </thead>
         <tbody>
             <tr>
             <td style='border: 1px solid black'><center>{{data["lat"]}}</center></td>
             <td style='border: 1px solid black'><center>{{data["lon"]}}</center></td>
-            <td style='border: 1px solid black'><center>{{data['current']['sunrise']}}</center></td>
-            <td style='border: 1px solid black'><center>{{data['current']['sunset']}}</center></td>
+            <td style='border: 1px solid black'><center>{{data["today_date"]}}</center></td>
+            <td style='border: 1px solid black'><center>{{data['current']['sunrise'].split()[1]}}</center></td>
+            <td style='border: 1px solid black'><center>{{data['current']['sunset'].split()[1]}}</center></td>
+            <td style='border: 1px solid black'><center>{{data["today_max"]}}</center></td>
+            <td style='border: 1px solid black'><center>{{data["today_min"]}}</center></td>
             </tr>
         </tbody>
     </table>
@@ -50,9 +56,8 @@
         </tbody>
         {% endfor  %}
     </table>
-    
-
-    
+    <br>
+    <div><img src={{data['chart_url']}} alt=""></div>
     {% endblock locations %}
 </body>
 </html>
